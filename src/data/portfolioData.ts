@@ -178,7 +178,7 @@ export const experience: ExperienceEntry[] = [
 export const skills: SkillModule[] = [
   { id: 'sw', name: 'SolidWorks / Fusion 360', level: 90, category: 'CAD' },
   { id: 'ros', name: 'ROS 2 / Python', level: 85, category: 'Software' },
-  { id: 'cnc', name: 'CNC Machining', level: 75, category: 'Manufacturing' },
+  { id: 'cnc', name: 'MATLAB', level: 50, category: 'Simulation' },
   { id: 'pcb', name: 'PCB Design', level: 70, category: 'Electronics' },
   { id: 'embedded', name: 'Embedded C / RTOS', level: 80, category: 'Firmware' },
 ];
