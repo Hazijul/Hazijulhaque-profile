@@ -86,8 +86,8 @@ export const projects: ProjectSpec[] = [
     description: 'Precision articulated manipulator with carbon-fiber forearm segments.',
   },
   {
-    id: 'robotic-arm',
-    title: '6-DOF Robotic Arm Base',
+    id: 'Mobile robotic-arm',
+    title: '6-DOF Mobile Robotic Arm Base',
     category: 'cad',
     complexity: 4,
     maxComplexity: 5,
