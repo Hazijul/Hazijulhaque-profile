@@ -41,7 +41,7 @@ export function AboutMeView({ arcRevealed, onArcReveal, onBack }: AboutMeViewPro
           </ul>
 
           <p className="about-arc-hint">
-            Hover the Arc Reactor in the workshop to activate the holographic portrait
+            Hover the Arc Reactor in the workshop to activate the holographic- portrait
           </p>
         </div>
 
