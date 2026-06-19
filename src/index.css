@@ -177,6 +177,15 @@ body,
   margin-top: 0.35rem;
 }
 
+.hero-tagline {
+  font-size: clamp(0.75rem, 1.6vw, 0.9rem);
+  color: rgba(224, 240, 255, 0.65);
+  max-width: 520px;
+  margin: 0.5rem auto 0;
+  line-height: 1.5;
+  letter-spacing: 0.04em;
+}
+
 .hero-hint {
   font-size: 0.75rem;
   color: rgba(224, 240, 255, 0.45);
@@ -432,6 +441,13 @@ body,
   line-height: 1.4;
 }
 
+.category-hub-count {
+  font-family: var(--font-hud);
+  font-size: 0.55rem;
+  color: var(--amber);
+  letter-spacing: 0.1em;
+}
+
 .category-hub-action {
   font-family: var(--font-hud);
   font-size: 0.55rem;
@@ -442,6 +458,21 @@ body,
 
 .category-detail {
   max-width: 720px;
+}
+
+.empty-data-hint {
+  padding: 1.25rem;
+  border: 1px dashed var(--border);
+  background: rgba(4, 20, 40, 0.6);
+  color: rgba(224, 240, 255, 0.7);
+  line-height: 1.6;
+  font-size: 0.9rem;
+}
+
+.empty-data-hint code {
+  color: var(--green);
+  font-family: monospace;
+  font-size: 0.85em;
 }
 
 .bay-column h3.bay-category {
@@ -550,6 +581,14 @@ body,
   font-family: var(--font-hud);
   font-size: 0.55rem;
   color: var(--amber);
+}
+
+.module-desc {
+  display: block;
+  font-size: 0.8rem;
+  color: rgba(224, 240, 255, 0.55);
+  margin-top: 0.25rem;
+  line-height: 1.35;
 }
 
 /* HUD Popup */
@@ -690,6 +729,54 @@ body,
   align-items: start;
 }
 
+.about-profile-panel {
+  padding: 1.5rem;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(8px);
+}
+
+.about-name {
+  font-family: var(--font-hud);
+  font-size: 1.4rem;
+  color: #fff;
+  margin: 0.75rem 0 0.25rem;
+}
+
+.about-title {
+  color: var(--green);
+  font-size: 1rem;
+  letter-spacing: 0.08em;
+}
+
+.about-tagline {
+  color: rgba(224, 240, 255, 0.6);
+  font-size: 0.9rem;
+  margin: 0.75rem 0 1rem;
+  line-height: 1.5;
+}
+
+.about-bio-list {
+  list-style: none;
+  margin: 0 0 1rem;
+  padding: 0;
+}
+
+.about-bio-list li {
+  font-family: var(--font-hud);
+  font-size: 0.6rem;
+  color: var(--cyan);
+  padding: 0.35rem 0;
+  border-bottom: 1px solid rgba(0, 212, 255, 0.1);
+  letter-spacing: 0.06em;
+}
+
+.about-arc-hint {
+  font-size: 0.8rem;
+  color: rgba(255, 170, 0, 0.7);
+  margin-top: 0.5rem;
+}
+
 .about-hint {
   padding: 1.5rem;
 }
@@ -740,6 +827,9 @@ body,
   position: absolute;
   inset: 0;
   background: linear-gradient(180deg, transparent 40%, rgba(0, 255, 204, 0.3) 50%, transparent 60%);
+}
+
+.holo-scan.active {
   animation: holoScan 2s linear infinite;
 }
 
@@ -881,9 +971,19 @@ body,
   margin: 0.5rem 0;
 }
 
+.contact-role {
+  color: var(--green);
+  letter-spacing: 0.1em;
+  margin-bottom: 0.5rem;
+}
+
 .contact-sub {
-  color: rgba(224, 240, 255, 0.5);
+  color: rgba(224, 240, 255, 0.55);
   margin-bottom: 2rem;
+  line-height: 1.5;
+  max-width: 420px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .contact-links {

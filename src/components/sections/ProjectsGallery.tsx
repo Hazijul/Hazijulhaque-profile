@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import {
   projects,
   projectCategories,
+  countProjectsByCategory,
   type ProjectCategoryId,
 } from '../../data/portfolioData';
 import { BaySlot } from '../HUD/BaySlot';
@@ -77,8 +78,8 @@ export function ProjectsGallery({ onBack, onProjectHover }: ProjectsGalleryProps
         <h2>{activeCategory ? categoryMeta?.label : 'Select a Project Module'}</h2>
         <p>
           {activeCategory
-            ? 'Hover any module for spec readout · Wireframe models rotate in workshop space'
-            : 'Choose a category to explore hardware builds, mechanical CAD, or autonomous systems'}
+            ? `${categoryProjects.length} project(s) · hover for full spec readout`
+            : `${projects.length} total projects across all categories`}
         </p>
       </div>
 
@@ -97,6 +98,8 @@ export function ProjectsGallery({ onBack, onProjectHover }: ProjectsGalleryProps
                 label={cat.label}
                 icon={cat.icon}
                 description={cat.description}
+                count={countProjectsByCategory(cat.dataCategory)}
+                countLabel="projects"
                 onOpen={() => setActiveCategory(cat.id)}
               />
             ))}
@@ -109,30 +112,38 @@ export function ProjectsGallery({ onBack, onProjectHover }: ProjectsGalleryProps
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -12 }}
           >
-            <div className="bay-grid single-col">
-              <div className="bay-column">
-                {categoryProjects.map((p) => (
-                  <BaySlot
-                    key={p.id}
-                    label="ADD PROJECT MODULE"
-                    filled
-                    onHover={(e) => handleHover(p.id, e)}
-                    className={hoveredId === p.id ? 'highlighted' : ''}
-                  >
-                    <div className="project-module">
-                      <span className="module-icon">{categoryMeta?.icon}</span>
-                      <div>
-                        <strong>{p.title}</strong>
-                        <span className="module-level">
-                          LVL {p.complexity}/{p.maxComplexity}
-                        </span>
+            {categoryProjects.length === 0 ? (
+              <p className="empty-data-hint">
+                No projects in this category yet. Add entries to the{' '}
+                <code>projects</code> array in <code>src/data/portfolioData.ts</code> with
+                category &apos;{categoryMeta?.dataCategory}&apos;.
+              </p>
+            ) : (
+              <div className="bay-grid single-col">
+                <div className="bay-column">
+                  {categoryProjects.map((p) => (
+                    <BaySlot
+                      key={p.id}
+                      label="ADD PROJECT MODULE"
+                      filled
+                      onHover={(e) => handleHover(p.id, e)}
+                      className={hoveredId === p.id ? 'highlighted' : ''}
+                    >
+                      <div className="project-module">
+                        <span className="module-icon">{categoryMeta?.icon}</span>
+                        <div>
+                          <strong>{p.title}</strong>
+                          <span className="module-level">
+                            LVL {p.complexity}/{p.maxComplexity}
+                          </span>
+                          <span className="module-desc">{p.description}</span>
+                        </div>
                       </div>
-                    </div>
-                  </BaySlot>
-                ))}
-                <BaySlot label="ADD PROJECT MODULE" onHover={() => play('pulse')} />
+                    </BaySlot>
+                  ))}
+                </div>
               </div>
-            </div>
+            )}
           </motion.div>
         )}
       </AnimatePresence>

@@ -24,6 +24,7 @@ export function SkillsBay({ onBack }: SkillsBayProps) {
       <div className="section-header">
         <span className="section-tag">SKILLS MODULE</span>
         <h2>Technical Proficiency Matrix</h2>
+        <p>{skills.length} skills loaded from portfolio data</p>
       </div>
 
       <div className="bay-grid skills-grid">
@@ -51,8 +52,6 @@ export function SkillsBay({ onBack }: SkillsBayProps) {
             </div>
           </BaySlot>
         ))}
-        <BaySlot label="ADD SKILL MODULE" onHover={() => play('pulse')} />
-        <BaySlot label="ADD SKILL MODULE" onHover={() => play('pulse')} />
       </div>
     </motion.div>
   );

@@ -28,40 +28,45 @@ export function AboutMeView({ arcRevealed, onArcReveal, onBack }: AboutMeViewPro
       </button>
 
       <div className="about-layout">
-        <div className="about-hint">
-          <span className="hint-tag">MARK LXXXV CONSTRUCT</span>
-          <p>Hover the Arc Reactor core to initiate identity reveal protocol</p>
+        <div className="about-profile-panel">
+          <span className="hint-tag">IDENTITY MODULE</span>
+          <h2 className="about-name">{personalData.name}</h2>
+          <p className="about-title">{personalData.title}</p>
+          <p className="about-tagline">{personalData.tagline}</p>
+
+          <ul className="about-bio-list">
+            {personalData.bio.map((line) => (
+              <li key={line}>{line}</li>
+            ))}
+          </ul>
+
+          <p className="about-arc-hint">
+            Hover the Arc Reactor in the workshop to activate the holographic portrait
+          </p>
         </div>
 
         <div className="portrait-reveal">
           <motion.div
-            className={`holo-portrait ${arcRevealed ? 'visible' : ''}`}
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{
-              opacity: arcRevealed ? 1 : 0,
-              scale: arcRevealed ? 1 : 0.8,
-            }}
-            transition={{ duration: 0.6 }}
+            className={`holo-portrait ${arcRevealed ? 'revealed' : ''}`}
+            animate={{ opacity: arcRevealed ? 1 : 0.35, scale: arcRevealed ? 1 : 0.92 }}
+            transition={{ duration: 0.5 }}
           >
             <div className="holo-frame">
               <img src={personalData.portrait} alt={personalData.name} />
-              <div className="holo-scan" />
+              <div className={`holo-scan ${arcRevealed ? 'active' : ''}`} />
             </div>
-            <div className="data-scroll">
-              <div className="scroll-content">
-                {personalData.bio.map((line) => (
-                  <span key={line}>{line}</span>
-                ))}
-                {personalData.bio.map((line) => (
-                  <span key={`dup-${line}`}>{line}</span>
-                ))}
+            {arcRevealed && (
+              <div className="data-scroll">
+                <div className="scroll-content">
+                  {personalData.bio.map((line) => (
+                    <span key={line}>{line}</span>
+                  ))}
+                  {personalData.bio.map((line) => (
+                    <span key={`dup-${line}`}>{line}</span>
+                  ))}
+                </div>
               </div>
-            </div>
-            <div className="identity-block">
-              <h2>{personalData.name}</h2>
-              <p>{personalData.title}</p>
-              <p className="tagline">{personalData.tagline}</p>
-            </div>
+            )}
           </motion.div>
         </div>
       </div>

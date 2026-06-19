@@ -118,6 +118,7 @@ function App() {
                   </span>
                 </h1>
                 <p className="hero-sub">{personalData.title}</p>
+                <p className="hero-tagline">{personalData.tagline}</p>
                 <p className="hero-hint">Select a data-node to navigate the portfolio network</p>
               </div>
               <DataNodeGrid

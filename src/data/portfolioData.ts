@@ -1,3 +1,32 @@
+/**
+ * =============================================================================
+ * PORTFOLIO DATA — EDIT EVERYTHING HERE
+ * =============================================================================
+ *
+ * This is the ONLY file you need to change to update site content.
+ * Save the file → refresh the browser (or redeploy on Vercel).
+ *
+ * WHERE EACH SECTION APPEARS ON THE WEBSITE:
+ * ───────────────────────────────────────────
+ * personalData     → Home hero, About Me, Contact
+ * projects         → Projects Gallery → pick a category → project cards + hover popup
+ * experience       → Experience → Teams or Internships
+ * skills           → Skills node (all entries shown as bars)
+ * navNodes         → Main grid node labels & positions (advanced — usually leave as-is)
+ *
+ * QUICK EDITS:
+ * ────────────
+ * • Name / job title / email / links  → personalData
+ * • Your photo                         → put image in public/ folder, set personalData.portrait
+ * • Add a project                      → push object to projects[] with category:
+ *                                        'hardware' | 'cad' | 'autonomous'
+ * • Add team role                      → push to experience[] with type: 'team'
+ * • Add internship                     → push to experience[] with type: 'internship'
+ * • Add a skill                        → push to skills[] (level = 0–100)
+ *
+ * =============================================================================
+ */
+
 export type ProjectSpec = {
   id: string;
   title: string;
@@ -25,6 +54,7 @@ export type SkillModule = {
   category: string;
 };
 
+/** Home hero, About Me, and Contact — edit your identity here */
 export const personalData = {
   name: 'Hazijul Haque',
   title: 'Electronics & Robotics Engineer',
@@ -35,12 +65,14 @@ export const personalData = {
     'STATUS: Active Development',
     'LOCATION: Workshop Node Alpha-7',
   ],
+  /** Path from public/ folder, e.g. '/portrait.jpg' or '/portrait.svg' */
   portrait: '/portrait.svg',
   email: 'you@email.com',
   github: 'https://github.com',
   linkedin: 'https://linkedin.com',
 };
 
+/** Projects — each item appears under its category in Projects Gallery */
 export const projects: ProjectSpec[] = [
   {
     id: 'robotic-arm',
@@ -99,6 +131,7 @@ export const projects: ProjectSpec[] = [
   },
 ];
 
+/** Experience — type 'team' → Teams hub | type 'internship' → Internships hub */
 export const experience: ExperienceEntry[] = [
   {
     id: 'team-robotics',
@@ -114,8 +147,23 @@ export const experience: ExperienceEntry[] = [
     period: '2023 – 2024',
     type: 'team',
   },
+  {
+    id: 'intern-robotics',
+    title: 'Robotics Engineering Intern',
+    org: 'Example Robotics Ltd.',
+    period: 'Summer 2024',
+    type: 'internship',
+  },
+  {
+    id: 'intern-embedded',
+    title: 'Embedded Systems Intern',
+    org: 'Example Electronics Co.',
+    period: 'Summer 2023',
+    type: 'internship',
+  },
 ];
 
+/** Skills — all entries render on the Skills page (level 0–100) */
 export const skills: SkillModule[] = [
   { id: 'sw', name: 'SolidWorks / Fusion 360', level: 90, category: 'CAD' },
   { id: 'ros', name: 'ROS 2 / Python', level: 85, category: 'Software' },
@@ -145,18 +193,14 @@ export type NavNode = {
   parent?: NodeId;
 };
 
+/** Main navigation grid — only edit labels if you rename sections */
 export const navNodes: NavNode[] = [
-  { id: 'home', label: 'Home / Hero', x: 50, y: 14 },
-  { id: 'about', label: 'About Me', x: 12, y: 30, parent: 'home' },
-  { id: 'projects', label: 'Projects Gallery', x: 30, y: 30, parent: 'home' },
-  { id: 'experience', label: 'Experience', x: 50, y: 30, parent: 'home' },
-  { id: 'skills', label: 'Skills', x: 70, y: 30, parent: 'home' },
-  { id: 'contact', label: 'Contact', x: 88, y: 30, parent: 'home' },
-  { id: 'hardware-builds', label: 'Hardware Builds', x: 12, y: 48, parent: 'about' },
-  { id: 'cad-mechanical', label: 'CAD / Mechanical', x: 24, y: 48, parent: 'projects' },
-  { id: 'autonomous-code', label: 'Autonomous / Code', x: 36, y: 48, parent: 'projects' },
-  { id: 'teams', label: 'Teams', x: 46, y: 64, parent: 'experience' },
-  { id: 'internships', label: 'Internships', x: 58, y: 64, parent: 'experience' },
+  { id: 'home', label: 'Home / Hero', x: 50, y: 28 },
+  { id: 'about', label: 'About Me', x: 14, y: 52, parent: 'home' },
+  { id: 'projects', label: 'Projects Gallery', x: 32, y: 52, parent: 'home' },
+  { id: 'experience', label: 'Experience', x: 50, y: 52, parent: 'home' },
+  { id: 'skills', label: 'Skills', x: 68, y: 52, parent: 'home' },
+  { id: 'contact', label: 'Contact', x: 86, y: 52, parent: 'home' },
 ];
 
 export const connections: [NodeId, NodeId][] = [
@@ -165,10 +209,66 @@ export const connections: [NodeId, NodeId][] = [
   ['home', 'experience'],
   ['home', 'skills'],
   ['home', 'contact'],
-  ['about', 'hardware-builds'],
-  ['projects', 'cad-mechanical'],
-  ['projects', 'autonomous-code'],
-  ['experience', 'teams'],
-  ['experience', 'internships'],
-  ['about', 'projects'],
 ];
+
+export type ProjectCategoryId = 'hardware-builds' | 'cad-mechanical' | 'autonomous-code';
+export type ExperienceCategoryId = 'teams' | 'internships';
+
+export const projectCategories: {
+  id: ProjectCategoryId;
+  label: string;
+  icon: string;
+  dataCategory: ProjectSpec['category'];
+  description: string;
+}[] = [
+  {
+    id: 'hardware-builds',
+    label: 'Hardware Builds',
+    icon: '▣',
+    dataCategory: 'hardware',
+    description: 'PCBs, power systems, and physical hardware assemblies',
+  },
+  {
+    id: 'cad-mechanical',
+    label: 'CAD / Mechanical',
+    icon: '⚙',
+    dataCategory: 'cad',
+    description: 'Robotic arms, chassis frames, and precision mechanical design',
+  },
+  {
+    id: 'autonomous-code',
+    label: 'Autonomous / Code',
+    icon: '⬡',
+    dataCategory: 'autonomous',
+    description: 'Navigation stacks, embedded control, and autonomous systems',
+  },
+];
+
+export const experienceCategories: {
+  id: ExperienceCategoryId;
+  label: string;
+  icon: string;
+  description: string;
+}[] = [
+  {
+    id: 'teams',
+    label: 'Teams',
+    icon: '◈',
+    description: 'Competition teams and collaborative engineering roles',
+  },
+  {
+    id: 'internships',
+    label: 'Internships',
+    icon: '◇',
+    description: 'Industry placements and professional experience',
+  },
+];
+
+/** Count helpers used by category cards — no need to edit */
+export function countProjectsByCategory(category: ProjectSpec['category']) {
+  return projects.filter((p) => p.category === category).length;
+}
+
+export function countExperienceByType(type: ExperienceEntry['type']) {
+  return experience.filter((e) => e.type === type).length;
+}

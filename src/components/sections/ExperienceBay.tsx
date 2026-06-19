@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import {
   experience,
   experienceCategories,
+  countExperienceByType,
   type ExperienceCategoryId,
 } from '../../data/portfolioData';
 import { BaySlot } from '../HUD/BaySlot';
@@ -18,8 +19,9 @@ export function ExperienceBay({ onBack }: ExperienceBayProps) {
   const { play } = useSound();
 
   const categoryMeta = experienceCategories.find((c) => c.id === activeCategory);
+  const entryType = activeCategory === 'teams' ? 'team' : 'internship';
   const entries = activeCategory
-    ? experience.filter((e) => e.type === (activeCategory === 'teams' ? 'team' : 'internship'))
+    ? experience.filter((e) => e.type === entryType)
     : [];
 
   return (
@@ -49,8 +51,8 @@ export function ExperienceBay({ onBack }: ExperienceBayProps) {
         <h2>{activeCategory ? categoryMeta?.label : 'Select Experience Module'}</h2>
         <p>
           {activeCategory
-            ? 'Review roles and organizations in this category'
-            : 'Choose Teams or Internships to view your experience details'}
+            ? `${entries.length} entr${entries.length === 1 ? 'y' : 'ies'} listed`
+            : `${experience.length} total entries · Teams & Internships`}
         </p>
       </div>
 
@@ -69,6 +71,8 @@ export function ExperienceBay({ onBack }: ExperienceBayProps) {
                 label={cat.label}
                 icon={cat.icon}
                 description={cat.description}
+                count={countExperienceByType(cat.id === 'teams' ? 'team' : 'internship')}
+                countLabel="entries"
                 onOpen={() => setActiveCategory(cat.id)}
               />
             ))}
@@ -81,28 +85,32 @@ export function ExperienceBay({ onBack }: ExperienceBayProps) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -12 }}
           >
-            <div className="bay-grid single-col">
-              <div className="bay-column">
-                {entries.map((e) => (
-                  <BaySlot
-                    key={e.id}
-                    label="ADD EXPERIENCE DETAILS"
-                    filled
-                    onHover={() => play('hover')}
-                  >
-                    <div className="experience-module">
-                      <strong>{e.title}</strong>
-                      <span>{e.org}</span>
-                      <span className="period">{e.period}</span>
-                    </div>
-                  </BaySlot>
-                ))}
-                <BaySlot label="ADD EXPERIENCE DETAILS" onHover={() => play('pulse')} />
-                {activeCategory === 'internships' && (
-                  <BaySlot label="ADD EXPERIENCE DETAILS" onHover={() => play('pulse')} />
-                )}
+            {entries.length === 0 ? (
+              <p className="empty-data-hint">
+                No {categoryMeta?.label.toLowerCase()} yet. Add entries to the{' '}
+                <code>experience</code> array in <code>src/data/portfolioData.ts</code> with
+                type &apos;{entryType}&apos;.
+              </p>
+            ) : (
+              <div className="bay-grid single-col">
+                <div className="bay-column">
+                  {entries.map((e) => (
+                    <BaySlot
+                      key={e.id}
+                      label="ADD EXPERIENCE DETAILS"
+                      filled
+                      onHover={() => play('hover')}
+                    >
+                      <div className="experience-module">
+                        <strong>{e.title}</strong>
+                        <span>{e.org}</span>
+                        <span className="period">{e.period}</span>
+                      </div>
+                    </BaySlot>
+                  ))}
+                </div>
               </div>
-            </div>
+            )}
           </motion.div>
         )}
       </AnimatePresence>

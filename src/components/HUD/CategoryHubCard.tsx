@@ -5,10 +5,19 @@ type CategoryHubCardProps = {
   label: string;
   icon: string;
   description: string;
+  count: number;
+  countLabel: string;
   onOpen: () => void;
 };
 
-export function CategoryHubCard({ label, icon, description, onOpen }: CategoryHubCardProps) {
+export function CategoryHubCard({
+  label,
+  icon,
+  description,
+  count,
+  countLabel,
+  onOpen,
+}: CategoryHubCardProps) {
   const { play } = useSound();
 
   return (
@@ -25,6 +34,9 @@ export function CategoryHubCard({ label, icon, description, onOpen }: CategoryHu
     >
       <span className="category-hub-icon">{icon}</span>
       <span className="category-hub-label">{label}</span>
+      <span className="category-hub-count">
+        {count} {countLabel}
+      </span>
       <span className="category-hub-desc">{description}</span>
       <span className="category-hub-action">OPEN MODULE →</span>
     </motion.button>

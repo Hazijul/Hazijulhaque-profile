@@ -28,8 +28,9 @@ export function ContactView({ onBack }: ContactViewProps) {
 
       <div className="contact-panel">
         <span className="section-tag">CONTACT NODE</span>
-        <h2>Establish Connection</h2>
-        <p className="contact-sub">Secure channel available · Response latency &lt; 24h</p>
+        <h2>{personalData.name}</h2>
+        <p className="contact-role">{personalData.title}</p>
+        <p className="contact-sub">{personalData.tagline}</p>
 
         <div className="contact-links">
           {links.map((link) => (
