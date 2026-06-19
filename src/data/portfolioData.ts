@@ -86,6 +86,17 @@ export const projects: ProjectSpec[] = [
     description: 'Precision articulated manipulator with carbon-fiber forearm segments.',
   },
   {
+    id: 'robotic-arm',
+    title: '6-DOF Robotic Arm Base',
+    category: 'cad',
+    complexity: 4,
+    maxComplexity: 5,
+    software: ['SolidWorks', 'Fusion 360'],
+    manufacturing: ['SLA 3D Printing', 'CNC'],
+    components: ['NEMA 23 motors', 'Thrust bearings', 'Harmonic drive'],
+    description: 'Precision articulated manipulator with carbon-fiber forearm segments.',
+  },
+  {
     id: 'cnc-chassis',
     title: 'CNC-Milled Chassis Frame',
     category: 'cad',
