@@ -52,7 +52,7 @@ export function AboutMeView({ arcRevealed, onArcReveal, onBack }: AboutMeViewPro
             transition={{ duration: 0.5 }}
           >
             <div className="holo-frame">
-              <img src={personalData.portrait} alt={personalData.name} />
+              <img src="/profile-pic.jpeg" alt={personalData.name} />
               <div className={`holo-scan ${arcRevealed ? 'active' : ''}`} />
             </div>
             {arcRevealed && (
